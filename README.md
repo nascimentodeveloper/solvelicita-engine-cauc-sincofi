@@ -248,3 +248,29 @@ Os workflows de pipeline reutilizam um executor único por UF e dependem dos sec
 - `GCP_SA_KEY`
 - `SUPABASE_URL`
 - `SUPABASE_KEY`
+
+---
+
+## API CAUC + SICONFI (consulta por CNPJ/IBGE)
+
+Sem alterar a lógica dos coletores existentes, o projeto agora expõe uma API focada em `CAUC` e `SICONFI` para consumo externo.
+
+### Rodando em Docker (porta 4857)
+
+```bash
+docker build -t solvelicita-api .
+docker run --rm -p 4857:4857 solvelicita-api
+```
+
+### Endpoints
+
+- `GET /health`
+- `GET /v1/consulta?cnpj=...`
+- `GET /v1/consulta?ibge=...`
+- `GET /v1/consulta?ibge=...&mode=full` (`incremental` por padrão)
+
+Exemplo:
+
+```bash
+curl "http://localhost:4857/v1/consulta?ibge=2507507"
+```
